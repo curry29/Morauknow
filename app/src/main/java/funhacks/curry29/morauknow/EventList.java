@@ -1,5 +1,6 @@
 package funhacks.curry29.morauknow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -36,8 +37,10 @@ public class EventList extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String msg = position + "番目のアイテムがクリックされました";
-                Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
+                Intent intent  = new Intent(getApplication(),EventDtails.class);
+                intent.putExtra("EventId",list.get(position).getEventId());
+                Log.d("Event Item Ciliced", "EventId = "+intent.getIntExtra("EventId",0));
+                startActivity(intent);
             }
         });
     }
