@@ -20,7 +20,6 @@ import com.nifty.cloud.mb.core.NCMBObject;
 import com.nifty.cloud.mb.core.NCMBQuery;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
