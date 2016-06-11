@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.miyoshi.hack.MainActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/map_all"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="駅前・大門エリア"
+        android:id="@+id/button"
+        android:layout_marginBottom="262dp"
+        android:layout_marginStart="49dp"
+        android:background="#f8a2a2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"
+        android:textSize="23dp" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="西部エリア"
+        android:id="@+id/button2"
+        android:background="#f8e408"
+        android:textStyle="bold"
+        android:textSize="23dp"
+        android:layout_marginBottom="84dp"
+        android:layout_marginStart="81dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/button" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="東部エリア"
+        android:id="@+id/button3"
+        android:background="#bf7831"
+        android:textStyle="bold"
+        android:textSize="23dp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginEnd="18dp"
+        android:layout_above="@+id/button2"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="中央エリア"
+        android:id="@+id/button4"
+        android:background="#5cb63e"
+        android:textStyle="bold"
+        android:textSize="23dp"
+        android:layout_above="@+id/button"
+        android:layout_alignStart="@+id/button2"
+        android:layout_marginBottom="113dp" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="五稜郭エリア"
+        android:id="@+id/button5"
+        android:background="#399bdd"
+        android:textStyle="bold"
+        android:textSize="23dp"
+        android:layout_above="@+id/button4"
+        android:layout_toEndOf="@+id/button"
+        android:layout_marginBottom="90dp" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="北部エリア"
+        android:id="@+id/button6"
+        android:background="#a933d8"
+        android:textStyle="bold"
+        android:textSize="23dp"
+        android:layout_marginTop="41dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:id="@+id/button7"
+        android:background="@null"
+        android:layout_alignTop="@+id/button2"
+        android:layout_alignStart="@+id/button" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="110dp"
+        android:id="@+id/button8"
+        android:background="@null"
+        android:layout_marginStart="24dp"
+        android:layout_alignTop="@+id/button"
+        android:layout_alignStart="@+id/button2"
+        android:layout_marginTop="15dp" />
+
+    <Button
+        android:layout_width="140dp"
+        android:layout_height="180dp"
+        android:id="@+id/button9"
+        android:background="@null"
+        android:layout_marginEnd="20dp"
+        android:layout_alignBottom="@+id/button3"
+        android:layout_alignEnd="@+id/button3" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="130dp"
+        android:id="@+id/button10"
+        android:background="@null"
+        android:layout_above="@+id/button9"
+        android:layout_toEndOf="@+id/button" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="130dp"
+        android:id="@+id/button11"
+        android:background="@null"
+        android:layout_alignTop="@+id/button5"
+        android:layout_alignEnd="@+id/button9" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="110dp"
+        android:id="@+id/button12"
+        android:background="@null"
+        android:layout_alignTop="@+id/button6"
+        android:layout_alignStart="@+id/button11" />
+
+
+</RelativeLayout>
