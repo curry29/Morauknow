@@ -81,7 +81,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        setZoom(lSS);
+       // setZoom(lSS);
         load();
         // Add a marker in Sydney and move the camera
        // LatLng hakodate = new LatLng(())
@@ -119,8 +119,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         public boolean onMarkerClick(Marker marker) {
                             // タップされたマーカーのタイトルを取得
                             String name = marker.getTitle().toString();
-
-                            
                             return false;
                         }
                     });

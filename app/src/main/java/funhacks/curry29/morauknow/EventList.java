@@ -51,7 +51,7 @@ public class EventList extends AppCompatActivity {
             public	void done(List<NCMBObject> results, NCMBException e)	{
                 if(e != null){
                     Log.d("load()", "NG");
-                    //load();
+                    load();
                 }else {
                     for (NCMBObject result : results) {
                         ListItem item = new ListItem();
