@@ -19,7 +19,7 @@ public class HomeActivity extends AppCompatActivity{
             }
         };
         findViewById(R.id.eventlist_button).setOnClickListener(eventlist_button_clickListener);
-        /*
+
         View.OnClickListener areamap_button_clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -27,7 +27,7 @@ public class HomeActivity extends AppCompatActivity{
             }
         };
         findViewById(R.id.areamap_button).setOnClickListener(areamap_button_clickListener);
-        */
+
 
 
     }
@@ -35,10 +35,10 @@ public class HomeActivity extends AppCompatActivity{
         Intent intent = new Intent(getApplication(), EventList.class);
         startActivity(intent);
     }
-/*
+
     private void home2areamap(){
-        Intent intent = new Intent(getApplication(), EventList.class);
+        Intent intent = new Intent(getApplication(), AreaMap.class);
         startActivity(intent);
     }
-    */
+
 }
