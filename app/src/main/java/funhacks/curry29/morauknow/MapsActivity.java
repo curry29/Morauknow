@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -43,6 +44,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
 
@@ -112,6 +114,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     }
                     setZoom(lSS);
+                    // マーカーがクリックされた時の処理
+                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+                            // タップされたマーカーのタイトルを取得
+                            String name = marker.getTitle().toString();
+
+                            
+                            return false;
+                        }
+                    });
                 }
             }
         });
