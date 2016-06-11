@@ -1,7 +1,9 @@
 package funhacks.curry29.morauknow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -12,8 +14,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.nifty.cloud.mb.core.FindCallback;
+import com.nifty.cloud.mb.core.NCMBException;
+import com.nifty.cloud.mb.core.NCMBObject;
+import com.nifty.cloud.mb.core.NCMBQuery;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -25,25 +32,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private static List<LatLng> lSS = new ArrayList<LatLng>(32);
     private static List<String> tSS = new ArrayList<String>(32);
-
-    public void listadd() {
-        lSS.add(new LatLng(41.786900, 140.736987));
-        lSS.add(new LatLng(40.786900, 141.936987));
-        lSS.add(new LatLng(41.996900, 141.136987));
-        lSS.add(new LatLng(41.386900, 141.536987));
-        lSS.add(new LatLng(41.186900, 140.936987));
-
-        tSS.add(new String("函館市1"));
-        tSS.add(new String("函館市2"));
-        tSS.add(new String("函館市3"));
-        tSS.add(new String("函館市4"));
-        tSS.add(new String("函館市5"));
-    }
-
+    int AreaId ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        Intent intent = getIntent();
+        AreaId = intent.getIntExtra("AREA_ID",0);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -85,20 +80,41 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        listadd();
-
-        for(int i=0;i<5;i++){
-
-            MarkerOptions mo = new MarkerOptions();
-            mo.position(lSS.get(i)).title(tSS.get(i)).flat(true);
-            Marker mHAKODATE = mMap.addMarker(mo);
-        }
-
+        setZoom(lSS);
+        load();
         // Add a marker in Sydney and move the camera
        // LatLng hakodate = new LatLng(())
      //   mMap.addMarker(new)
     //    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HAKODATE,14));
 
-        setZoom(lSS);
+
     }
+    private void load(){
+        NCMBQuery<NCMBObject> query	=new NCMBQuery<>("LatLng");
+        //データストアからデータを検索
+        query.findInBackground(new	FindCallback<NCMBObject>(){
+            @Override
+            public	void done(List<NCMBObject> results, NCMBException e)	{
+                if(e != null){
+                    Log.d("EventList:load()", "NG");
+                    //load();
+                }else {
+                    int count = 0;
+                    for (NCMBObject result : results) {
+                        if(result.getInt("AreaId") == AreaId) {
+                            lSS.add(new LatLng(result.getDouble("Ido"), result.getDouble("Keido")));
+                            tSS.add(new String(result.getString("ShopName")));
+                            // setZoom(lSS);
+                            MarkerOptions mo = new MarkerOptions();
+                            mo.position(lSS.get(count)).title(tSS.get(count)).flat(true);
+                            count++;
+                            Marker mHAKODATE = mMap.addMarker(mo);
+                        }
+                    }
+                    setZoom(lSS);
+                }
+            }
+        });
+    }
+
 }

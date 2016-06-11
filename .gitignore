@@ -6,4 +6,7 @@
 .DS_Store
 /build
 /captures
-.idea/*
+.idea/*.xml
+.idea/misc.xml
+.idea
+*.swp# 追加
