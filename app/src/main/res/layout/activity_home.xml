@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#e0ffff"
     tools:context="funhacks.curry29.morauknow.HomeActivity">
 
     <ImageView
@@ -15,24 +16,33 @@
         android:layout_height="wrap_content"
         android:id="@+id/homeview"
         android:src="@drawable/squid"
-        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="イベントから探す"
         android:id="@+id/eventlist_button"
-        android:layout_below="@+id/homeview"
-        android:layout_alignLeft="@+id/homeview"
-        android:layout_alignStart="@+id/homeview"/>
+        android:src="@drawable/event_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="マップから探す"
         android:id="@+id/areamap_button"
-        android:layout_below="@+id/homeview"
-        android:layout_alignRight="@+id/homeview"
-        android:layout_alignEnd="@+id/homeview"/>
+        android:src="@drawable/map_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_image"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/title_log"/>
+
 </RelativeLayout>
