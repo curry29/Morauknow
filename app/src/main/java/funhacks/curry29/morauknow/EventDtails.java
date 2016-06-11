@@ -46,11 +46,15 @@ private ShopItem item = new ShopItem();
                 }else {
                     int i = 0;
                     if(EventId<0){
+                        Log.d("Load", "ShopName "+ShopName);
                         for (NCMBObject result : results) {
-                            if(result.getString("ShopName") == ShopName) EventId = i;
+                            Log.d("Load", "ShopName "+result.getString("ShopName"));
+                            if(result.getString("ShopName").equals(ShopName)) {
+                                EventId = i;
+                                break;
+                            }
+                            i++;
                         }
-                        i++;
-                        EventId = 1;
                     }
                     //int imagename = getResources().getIdentifier(results.get(EventId).getString("ImageURL"),"drawable",getPackageName());
                    // int imagename = R.drawable.sample1;
