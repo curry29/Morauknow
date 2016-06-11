@@ -28,6 +28,8 @@ private ShopItem item = new ShopItem();
 
         loadShopItem();
 
+        //アクションバーに名前表示
+        getSupportActionBar().setTitle("イベント一覧");
 
     }
     private void loadShopItem(){
