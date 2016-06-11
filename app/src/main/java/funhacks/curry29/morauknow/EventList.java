@@ -29,6 +29,8 @@ public class EventList extends AppCompatActivity {
        load();
         lv = (ListView) findViewById(R.id.listview);
 
+        //アクションバーに名前表示
+        getSupportActionBar().setTitle("イベント一覧");
 
         //リスト項目が選択されたときのイベントを追加
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
