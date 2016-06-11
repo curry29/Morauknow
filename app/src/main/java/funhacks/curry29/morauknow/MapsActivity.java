@@ -107,7 +107,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }else {
                     int count = 0;
                     for (NCMBObject result : results) {
-                        if(result.getInt("AreaId") == AreaId) {
+                        if(result.getInt("AreaID") == AreaId) {
                             lSS.add(new LatLng(result.getDouble("Ido"), result.getDouble("Keido")));
                             tSS.add(new String(result.getString("ShopName")));
                             // setZoom(lSS);
