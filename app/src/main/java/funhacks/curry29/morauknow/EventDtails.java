@@ -17,6 +17,7 @@ import java.util.List;
 public class EventDtails extends AppCompatActivity {
 private ShopItem item = new ShopItem();
    int EventId;
+    String ShopName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,11 +26,12 @@ private ShopItem item = new ShopItem();
        /*インテントの取得*/
         Intent intent = getIntent();
         EventId = intent.getIntExtra("EventId",0);
+        ShopName = intent.getStringExtra("SHOP_NAME");
 
         loadShopItem();
 
         //アクションバーに名前表示
-        getSupportActionBar().setTitle("イベント一覧");
+        getSupportActionBar().setTitle("イベントの詳細");
 
     }
     private void loadShopItem(){
@@ -42,7 +44,15 @@ private ShopItem item = new ShopItem();
                     Log.d("ShopItem:load()", "NG");
                     //load();
                 }else {
-                    int imagename = getResources().getIdentifier(results.get(EventId).getString("ImageURL"),"drawable",getPackageName());
+                    int i = 0;
+                    if(EventId<0){
+                        for (NCMBObject result : results) {
+                            if(result.getString("ShopName") == ShopName) EventId = i;
+                        }
+                        i++;
+                        EventId = 1;
+                    }
+                    //int imagename = getResources().getIdentifier(results.get(EventId).getString("ImageURL"),"drawable",getPackageName());
                    // int imagename = R.drawable.sample1;
                     item.setShopName(results.get(EventId).getString("ShopName"));
                     TextView appShopName = (TextView) findViewById(R.id.Detail_ShopName);
@@ -60,7 +70,7 @@ private ShopItem item = new ShopItem();
                     TextView appEventDetail = (TextView) findViewById(R.id.Detail_EventDetail);
                     appEventDetail.setText(item.getEventDetail().replaceAll("改行","\n"));
 
-                    item.setImageURL(imagename);
+                    //item.setImageURL(imagename);
                     ImageView appEventImage = (ImageView) findViewById(R.id.Detail_imageView);
                     appEventImage.setImageResource(item.getImageURL());
                 }

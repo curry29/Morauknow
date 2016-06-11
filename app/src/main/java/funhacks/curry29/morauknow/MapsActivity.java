@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -119,6 +118,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         public boolean onMarkerClick(Marker marker) {
                             // タップされたマーカーのタイトルを取得
                             String name = marker.getTitle().toString();
+                            Intent intent = new Intent(getApplication(), EventDtails.class);
+                            intent.putExtra("SHOP_NAME", name);
+                            intent.putExtra("EventId", -10);
+                            startActivity(intent);
                             return false;
                         }
                     });
