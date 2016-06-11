@@ -9,6 +9,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -31,7 +33,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private static List<LatLng> lSS = new ArrayList<LatLng>(32);
     private static List<String> tSS = new ArrayList<String>(32);
-    int AreaId ;
+
+    BitmapDescriptor ika;
+
+   int AreaId ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +47,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        ika = BitmapDescriptorFactory.fromResource(R.drawable.ikachan);
 
     }
 
@@ -106,7 +112,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             tSS.add(new String(result.getString("ShopName")));
                             // setZoom(lSS);
                             MarkerOptions mo = new MarkerOptions();
-                            mo.position(lSS.get(count)).title(tSS.get(count)).flat(true);
+                            mo.position(lSS.get(count)).title(tSS.get(count)).flat(true).icon(ika);
                             count++;
                             Marker mHAKODATE = mMap.addMarker(mo);
                         }
