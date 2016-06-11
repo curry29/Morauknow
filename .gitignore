@@ -8,3 +8,5 @@
 /captures
 .idea/*.xml
 .idea/misc.xml
+.idea
+*.swp# 追加
