@@ -26,6 +26,7 @@ private ShopItem item = new ShopItem();
        /*インテントの取得*/
         Intent intent = getIntent();
         EventId = intent.getIntExtra("EventId",0);
+        Log.d("ShopItem:load()", "EventId="+EventId);
         ShopName = intent.getStringExtra("SHOP_NAME");
 
         loadShopItem();

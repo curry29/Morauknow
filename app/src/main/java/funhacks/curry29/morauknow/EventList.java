@@ -38,7 +38,7 @@ public class EventList extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent  = new Intent(getApplication(),EventDtails.class);
                 intent.putExtra("EventId",list.get(position).getEventId());
-                Log.d("Event Item Ciliced", "EventId = "+intent.getIntExtra("EventId",0));
+                Log.d("Event Item Ciliced", "EventId = "+list.get(position).getEventId());
                 startActivity(intent);
             }
         });
@@ -59,8 +59,9 @@ public class EventList extends AppCompatActivity {
                         item.setEventName(result.getString("EventName"));
                         item.setTime(result.getString("Time"));
                         item.setArea(result.getString("AreaName"));
+                        item.setEventId(result.getInt("EventId"));
                         //item.setImageURL(imagename);
-                        Log.d("Test", "done:"+item.getArea());
+
                         list.add(item);
                     }
                     ImageArrayAdapter adapter = new ImageArrayAdapter(getApplication(), R.layout.list_view_image_item, list);
