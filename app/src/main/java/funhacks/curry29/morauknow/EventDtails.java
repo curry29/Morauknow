@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +35,23 @@ private ShopItem item = new ShopItem();
         //アクションバーに名前表示
         getSupportActionBar().setTitle("イベントの詳細");
 
+        View.OnClickListener dtail_to_map_clicklistener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dtail2map();
+            }
+        };
+        findViewById(R.id.dtail_to_map).setOnClickListener(dtail_to_map_clicklistener);
+
     }
+
+    private void dtail2map(){
+        Intent intent = new Intent(getApplication(), MapsActivity.class);
+        intent.putExtra("SHOP_NAME",ShopName);
+        intent.putExtra("AREA_ID", -10);
+        startActivity(intent);
+    }
+
     private void loadShopItem(){
         NCMBQuery<NCMBObject> query	=new NCMBQuery<>("ShopItem");
         //データストアからデータを検索
