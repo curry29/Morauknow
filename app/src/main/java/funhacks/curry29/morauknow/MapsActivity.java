@@ -1,13 +1,9 @@
 package funhacks.curry29.morauknow;
 
 import android.content.Intent;
-import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Window;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -48,7 +44,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         ShopName = intent.getStringExtra("SHOP_NAME");
         Log.d("ShopItem:getExtra", "ShopName="+ShopName);
         NCMB.initialize(this.getApplicationContext(),"fe7bee8bea8475ddbecdbf020d6ec93c2dfb2bb6c857c33f16191eb9ce10ab19","3c50c489b02de8566548de932cadd64f75bbd7127039c1981bfe7652e15c8572");
-        
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         AreaId = intent.getIntExtra("AREA_ID",0);
@@ -83,12 +79,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
             public void onCameraChange(CameraPosition arg0) {
-                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(
+                mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
                         builder.build(), 100));
                 mMap.setOnCameraChangeListener(null);
+
             }
         });
-
     }
     /*
     //戻るボタンの処理
@@ -114,6 +110,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HAKODATE,14));
 
 
+        //追加-----------------------------
+        NCMBQuery<NCMBObject> query	=new NCMBQuery<>("LatLng");
+        //データストアからデータを検索
+        query.findInBackground(new	FindCallback<NCMBObject>(){
+            @Override
+            public	void done(List<NCMBObject> results, NCMBException e)	{
+                if(e != null){
+                    Log.d("EventList:load()", "NG");
+                    //load();
+                }else {
+                    int count = 0;
+
+                    for (NCMBObject result : results) {
+                        if (result.getInt("AreaID") == AreaId) {
+                            Log.d("MspdsSctivity:load()", "AreaId" + result.getInt("AreaID"));
+                            lSS.add(new LatLng(result.getDouble("Ido"), result.getDouble("Keido")));
+                            tSS.add(new String(result.getString("ShopName")));
+                        }
+                    }
+                }
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HAKODATE,14));
+                setZoom(lSS);
+            }
+        });
+
+
     }
     private void load(){
         NCMBQuery<NCMBObject> query	=new NCMBQuery<>("LatLng");
@@ -134,7 +156,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 lSS.add(new LatLng(result.getDouble("Ido"), result.getDouble("Keido")));
                                 tSS.add(new String(result.getString("ShopName")));
-                                // setZoom(lSS);
                                 MarkerOptions mo = new MarkerOptions();
                                 mo.position(lSS.get(count)).title(tSS.get(count)).flat(true).icon(ika);
                                 mMap.addMarker(mo);
@@ -145,7 +166,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             Log.d("MspdsSctivity:load()", "AreaId" + result.getInt("AreaID"));
                             lSS.add(new LatLng(result.getDouble("Ido"), result.getDouble("Keido")));
                             tSS.add(new String(result.getString("ShopName")));
-                            // setZoom(lSS);
                             MarkerOptions mo = new MarkerOptions();
                             mo.position(lSS.get(count)).title(tSS.get(count)).flat(true).icon(ika);
                             count++;
