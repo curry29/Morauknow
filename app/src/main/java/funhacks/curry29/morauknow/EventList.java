@@ -55,12 +55,12 @@ public class EventList extends AppCompatActivity {
                 }else {
                     for (NCMBObject result : results) {
                         ListItem item = new ListItem();
-                        //int imagename = getResources().getIdentifier(result.getString("imageURL"),"drawable",getPackageName());
+                        int imagename = getResources().getIdentifier(result.getString("ImageURL"),"drawable",getPackageName());
                         item.setEventName(result.getString("EventName"));
                         item.setTime(result.getString("Time"));
                         item.setArea(result.getString("AreaName"));
                         item.setEventId(result.getInt("EventId"));
-                        //item.setImageURL(imagename);
+                        item.setImageURL(imagename);
 
                         list.add(item);
                     }

@@ -41,6 +41,7 @@ public class ImageArrayAdapter extends ArrayAdapter<ListItem>{
 
         /*テキストのセット部*/
         ImageView appEventImage = (ImageView)view.findViewById(R.id.Event_Image);
+        appEventImage.setImageResource(item.getImageURL());
         TextView appEventName = (TextView) view.findViewById(R.id.Event_Name);
         appEventName.setText(item.getEventName());
         TextView appTime = (TextView) view.findViewById(R.id.Event_Time);
