@@ -139,6 +139,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
     private void load(){
         NCMBQuery<NCMBObject> query	=new NCMBQuery<>("LatLng");
+        lSS = new ArrayList<LatLng>(32);
+        tSS = new ArrayList<String>(32);
         //データストアからデータを検索
         query.findInBackground(new	FindCallback<NCMBObject>(){
             @Override
