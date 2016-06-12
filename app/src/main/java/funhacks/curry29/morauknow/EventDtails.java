@@ -74,7 +74,7 @@ private ShopItem item = new ShopItem();
                             i++;
                         }
                     }
-                    //int imagename = getResources().getIdentifier(results.get(EventId).getString("ImageURL"),"drawable",getPackageName());
+                    int imagename = getResources().getIdentifier(results.get(EventId).getString("ImageURL"),"drawable",getPackageName());
                    // int imagename = R.drawable.sample1;
                     item.setShopName(results.get(EventId).getString("ShopName"));
                     TextView appShopName = (TextView) findViewById(R.id.Detail_ShopName);
@@ -92,7 +92,7 @@ private ShopItem item = new ShopItem();
                     TextView appEventDetail = (TextView) findViewById(R.id.Detail_EventDetail);
                     appEventDetail.setText(item.getEventDetail().replaceAll("改行","\n"));
 
-                    //item.setImageURL(imagename);
+                    item.setImageURL(imagename);
                     ImageView appEventImage = (ImageView) findViewById(R.id.Detail_imageView);
                     appEventImage.setImageResource(item.getImageURL());
                 }
