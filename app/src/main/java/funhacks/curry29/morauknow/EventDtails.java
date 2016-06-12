@@ -1,6 +1,7 @@
 package funhacks.curry29.morauknow;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -74,8 +75,26 @@ private ShopItem item = new ShopItem();
                             i++;
                         }
                     }
+
+                    View LinerView =  findViewById(R.id.change_backgorund);
+                    item.setAreaId(results.get(EventId).getInt("AreaId"));
+
+                    if (item.getAreaId() == 0) {
+                        LinerView.setBackgroundColor(Color.parseColor("#f8a2a2"));
+                    } else if(item.getAreaId() == 1){
+                        LinerView.setBackgroundColor(Color.parseColor("#5cd632"));
+                    }else if(item.getAreaId() == 2){
+                        LinerView.setBackgroundColor(Color.parseColor("#399bdd"));
+                    }else if(item.getAreaId() == 3){
+                        LinerView.setBackgroundColor(Color.parseColor("#f8e408"));
+                    }else if(item.getAreaId() == 4){
+                        LinerView.setBackgroundColor(Color.parseColor("#bf7831"));
+                    }else{
+                        LinerView.setBackgroundColor(Color.parseColor("#a933d8"));
+                    }
                     int imagename = getResources().getIdentifier(results.get(EventId).getString("ImageURL"),"drawable",getPackageName());
                    // int imagename = R.drawable.sample1;
+
                     item.setShopName(results.get(EventId).getString("ShopName"));
                     TextView appShopName = (TextView) findViewById(R.id.Detail_ShopName);
                     appShopName.setText(item.getShopName());
