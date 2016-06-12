@@ -130,8 +130,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     }
                 }
+
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HAKODATE,14));
-                setZoom(lSS);
+                if(lSS.size()==1) {
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lSS.get(0),16));
+                }else{
+                    setZoom(lSS);
+                }
+
             }
         });
 
