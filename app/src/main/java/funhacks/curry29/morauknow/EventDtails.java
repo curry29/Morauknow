@@ -47,7 +47,7 @@ private ShopItem item = new ShopItem();
 
     private void dtail2map(){
         Intent intent = new Intent(getApplication(), MapsActivity.class);
-        intent.putExtra("SHOP_NAME",ShopName);
+        intent.putExtra("SHOP_NAME",item.getShopName());
         intent.putExtra("AREA_ID", -10);
         startActivity(intent);
     }

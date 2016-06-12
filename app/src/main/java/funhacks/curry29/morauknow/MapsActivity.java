@@ -1,9 +1,13 @@
 package funhacks.curry29.morauknow;
 
 import android.content.Intent;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Window;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -29,21 +33,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
 
-    private static final LatLng HAKODATE = new LatLng(41.786900, 140.736987);
+    private static final LatLng HAKODATE = new LatLng(41.772437, 140.729523);
+    private static final LatLng NullLatLng = new LatLng(0, 0);
     private static final String tHAKODATE = "函館市";
-
     private static List<LatLng> lSS = new ArrayList<LatLng>(32);
     private static List<String> tSS = new ArrayList<String>(32);
 
     BitmapDescriptor ika;
-
+    String ShopName;
    int AreaId ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        ShopName = intent.getStringExtra("SHOP_NAME");
+        Log.d("ShopItem:getExtra", "ShopName="+ShopName);
         NCMB.initialize(this.getApplicationContext(),"fe7bee8bea8475ddbecdbf020d6ec93c2dfb2bb6c857c33f16191eb9ce10ab19","3c50c489b02de8566548de932cadd64f75bbd7127039c1981bfe7652e15c8572");
+        
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        Intent intent = getIntent();
         AreaId = intent.getIntExtra("AREA_ID",0);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -64,7 +71,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * installed Google Play services and returned to the app.
      */
 
-    public void setZoom(List<LatLng> latLngList) {
+        public void setZoom(List<LatLng> latLngList) {
         if (mMap == null || latLngList.size() == 0)
             return;
 
@@ -77,23 +84,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onCameraChange(CameraPosition arg0) {
                 mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(
-                        builder.build(), 40));
+                        builder.build(), 100));
                 mMap.setOnCameraChangeListener(null);
             }
         });
+
+    }
+    /*
+    //戻るボタンの処理
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            // 戻るボタンの処理
+           mMap.clear();
+            return super.onKeyDown(keyCode, event);
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
     }
 
+  */
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
-       // setZoom(lSS);
         load();
         // Add a marker in Sydney and move the camera
-       // LatLng hakodate = new LatLng(())
-     //   mMap.addMarker(new)
-    //    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HAKODATE,14));
+        //LatLng hakodate = new LatLng(())
+        //mMap.addMarker(new)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HAKODATE,14));
 
 
     }
@@ -108,31 +126,48 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     //load();
                 }else {
                     int count = 0;
+
                     for (NCMBObject result : results) {
-                        if(result.getInt("AreaID") == AreaId) {
+                        if(AreaId<0){
+                            Log.d("Load", "ShopName "+ ShopName);
+                            if(result.getString("ShopName").equals(ShopName)){
+
+                                lSS.add(new LatLng(result.getDouble("Ido"), result.getDouble("Keido")));
+                                tSS.add(new String(result.getString("ShopName")));
+                                // setZoom(lSS);
+                                MarkerOptions mo = new MarkerOptions();
+                                mo.position(lSS.get(count)).title(tSS.get(count)).flat(true).icon(ika);
+                                mMap.addMarker(mo);
+                                break;
+                            }
+                        }
+                        else if(result.getInt("AreaID") == AreaId) {
+                            Log.d("MspdsSctivity:load()", "AreaId" + result.getInt("AreaID"));
                             lSS.add(new LatLng(result.getDouble("Ido"), result.getDouble("Keido")));
                             tSS.add(new String(result.getString("ShopName")));
                             // setZoom(lSS);
                             MarkerOptions mo = new MarkerOptions();
                             mo.position(lSS.get(count)).title(tSS.get(count)).flat(true).icon(ika);
                             count++;
-                            Marker mHAKODATE = mMap.addMarker(mo);
+                            mMap.addMarker(mo);
                         }
                     }
-                    setZoom(lSS);
-                    // マーカーがクリックされた時の処理
-                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    //setZoom(lSS);
+
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                         @Override
-                        public boolean onMarkerClick(Marker marker) {
+                        public void onInfoWindowClick(Marker marker) {
+                            // TODO Auto-generated method stub
                             // タップされたマーカーのタイトルを取得
                             String name = marker.getTitle().toString();
                             Intent intent = new Intent(getApplication(), EventDtails.class);
                             intent.putExtra("SHOP_NAME", name);
                             intent.putExtra("EventId", -10);
                             startActivity(intent);
-                            return false;
+                            //mMap.clear();
                         }
                     });
+
                 }
             }
         });
