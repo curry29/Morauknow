@@ -22,7 +22,7 @@
             android:layout_height="205dp"
             android:id="@+id/Detail_imageView" />
         <TextView
-            android:textSize="50dp"
+            android:textSize="70dp"
             android:layout_marginLeft="50dp"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
@@ -40,21 +40,21 @@
 
     <TextView
         android:layout_margin="20dp"
-        android:textSize="20dp"
+        android:textSize="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Detail_Connection"
         />
 
     <TextView
-        android:layout_margin="20dp"
-        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_margin="40dp"
+        android:textSize="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Detail_EventName" />
-
         <TextView
-            android:layout_margin="20dp"
+            android:layout_marginLeft="40dp"
             android:textSize="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
