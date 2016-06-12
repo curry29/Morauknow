@@ -1,6 +1,7 @@
 package funhacks.curry29.morauknow;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,21 @@ public class ImageArrayAdapter extends ArrayAdapter<ListItem>{
         appTime.setText(item.getTime());
         TextView appAreaName = (TextView) view.findViewById(R.id.Event_Area);
         appAreaName.setText(item.getArea());
+
+
+        if (item.getAreaId() == 0) {
+            view.setBackgroundColor(Color.parseColor("#f8a2a2"));
+        } else if(item.getAreaId() == 1){
+            view.setBackgroundColor(Color.parseColor("#5cd632"));
+        }else if(item.getAreaId() == 2){
+            view.setBackgroundColor(Color.parseColor("#399bdd"));
+        }else if(item.getAreaId() == 3){
+            view.setBackgroundColor(Color.parseColor("#f8e408"));
+        }else if(item.getAreaId() == 4){
+            view.setBackgroundColor(Color.parseColor("#bf7831"));
+        }else{
+            view.setBackgroundColor(Color.parseColor("#a933d8"));
+        }
         return view;
     }
 

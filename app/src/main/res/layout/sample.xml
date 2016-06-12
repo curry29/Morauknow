@@ -2,27 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView"
-        android:layout_gravity="center_horizontal">
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="vertical" android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal" android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:weightSum="1">
         <ImageView
-            android:layout_margin="20dp"
+            android:src="@drawable/squid"
             android:layout_width="211dp"
             android:layout_height="205dp"
             android:id="@+id/Detail_imageView" />
         <TextView
             android:textSize="50dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="25dp"
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,7 +30,6 @@
         android:layout_gravity="right"/>
 
     <TextView
-        android:layout_margin="20dp"
         android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,18 +37,13 @@
         />
 
     <TextView
-        android:layout_margin="20dp"
         android:textSize="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Detail_EventName" />
-
-        <TextView
-            android:layout_margin="20dp"
-            android:textSize="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Detail_EventDetail" />
-        </LinearLayout>
-    </ScrollView>
+    <TextView
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Detail_EventDetail" />
 </LinearLayout>
