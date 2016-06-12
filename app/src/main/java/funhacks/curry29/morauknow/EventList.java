@@ -61,7 +61,7 @@ public class EventList extends AppCompatActivity {
                         item.setArea(result.getString("AreaName"));
                         item.setEventId(result.getInt("EventId"));
                         item.setImageURL(imagename);
-
+                        item.setAreaId(result.getInt("AreaId"));
                         list.add(item);
                     }
                     ImageArrayAdapter adapter = new ImageArrayAdapter(getApplication(), R.layout.list_view_image_item, list);
